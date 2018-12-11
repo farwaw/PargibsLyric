@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <link rel="icon" type="image/png" href="images/projek.png"/>
+    <link type="text/css" rel="stylesheet" href="login.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Paragibah Lyric</title>
+
+</h:head>
+    <h:body style="background-image: url(images/3.jpg)">
+        <h:form  style="height:500px; position: relative; width: 500px; margin-top: 100px; margin-left: 30%;">
+                                       
+        <div class="filterable-items">
+            <h2 style="color: white; text-align: center; background-color: mediumvioletred;">Judul Lagu</h2>
+            
+            <ui:repeat  value="#{tblLyric.ambilSonglistbyCat(tblLyric.idCategory)}" var="item">
+               
+                    <h3><h:commandLink style="background-color: mediumvioletred; color: white; margin-left: 50px;" value="#{item.songTitle}" action="#{tblLyric.linkLyrics(item.idLyric)}"/></h3>
+   
+            </ui:repeat>
+           
+        </div> 
+            <h:commandLink style="background-color: mediumvioletred; color: white; margin-left: 40%; text-align: center;" value="Back To Home" action="index?faces-redirect=true"/>
+        
+        </h:form>
+        
+
+    
+    
+</h:body>
+</html>
+
+
+

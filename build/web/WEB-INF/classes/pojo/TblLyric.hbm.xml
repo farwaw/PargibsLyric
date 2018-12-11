@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-Oct-2018 22:11:00 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.TblLyric" table="tbl_lyric" catalog="paragibahlyric" optimistic-lock="version">
+        <id name="idLyric" type="java.lang.Integer">
+            <column name="ID_Lyric" />
+            <generator class="identity" />
+        </id>
+        <property name="songTitle" type="string">
+            <column name="Song_Title" length="50" not-null="true" />
+        </property>
+        
+        <property name="idCategory" type="int">
+            <column name="ID_Category" length="50" not-null="true" />
+        </property>
+        <property name="singer" type="string">
+            <column name="Singer" length="50" not-null="true" />
+        </property>
+        <property name="lyric" type="string">
+            <column name="Lyric" length="1000" not-null="true" />
+        </property>
+        <property name="category" type="string">
+            <column name="Category" length="50" not-null="false" />
+        </property>
+        
+    </class>
+    </hibernate-mapping>
+
+

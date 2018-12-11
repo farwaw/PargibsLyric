@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-Oct-2018 22:11:00 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Category" table="category" catalog="paragibahlyric" optimistic-lock="version">
+        <id name="idCategory" type="java.lang.Integer">
+            <column name="ID_Category" />
+            <generator class="identity" />
+        </id>
+        <property name="category" type="string">
+            <column name="Category" length="50" not-null="true" />
+        </property>
+        <property name="picture" type="string">
+            <column name="Picture" length="300" not-null="true" />
+        </property>
+        
+          
+        <list name="listLyric" cascade="all">
+            <key column="ID_Lyric"></key>
+            <index column="ID_Category"></index>
+            <one-to-many class="pojo.TblLyric"/>
+        </list>  
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <link rel="icon" type="image/png" href="images/projek.png"/>
+    <link type="text/css" rel="stylesheet" href="login.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Paragibah Lyric</title>
+
+</h:head>
+    <h:body style="background-image: url(images/7.jpg);">
+<h:form style=" width: 50%; position: relative; margin-left: 25%; margin-top: 10%; background-color: black;">
+
+    <div class="container" style="height:430px;">
+      <h2 style="margin-top: 5%; color: white; margin-right: 1%;"><center>Login For Admin</center></h2>
+      <label for="uname" style="color: white;"><b>Username</b></label><br/>
+      <h:inputText id="username" required="true" value="#{tblAdmin.username}"/>
+<br/>
+    <label for="psw" style="color: white;"><b>Password</b></label>
+    <br/>
+    <h:inputSecret id="password" required="true" value="#{tblAdmin.password}"/>
+        <br/>
+        <br/>
+        <h:outputText value="#{tblAdmin.msg}" style="color: red; padding-left: 32%;"/>
+        <br/>
+        <br/>
+        <h:commandButton type="submit" style="background-color: grey; color: black; margin-left: 45%;" class="btn btn-primary" value="Login" action="#{tblAdmin.validateLogin()}" />
+    <br/>
+    <br/>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.xhtml" style="color: white; margin-left:38%;"><span class="glyphicon glyphicon-log-in"></span>back to home...</a></li>
+    </ul>  
+  </div>
+</h:form>
+
+    
+    
+</h:body>
+</html>

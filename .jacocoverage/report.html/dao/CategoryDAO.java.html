@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CategoryDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;PargibsLyric&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">CategoryDAO.java</span></div><h1>CategoryDAO.java</h1><pre class="source lang-java linenums">package dao;
+
+import pojo.Category;
+import util.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.context.FacesContext;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+<span class="nc" id="L12">public class CategoryDAO {</span>
+
+    public void addCategory(Category categoryObj) {
+<span class="nc" id="L15">        Transaction transObj = null;</span>
+<span class="nc" id="L16">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="nc" id="L18">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L19">            sessionObj.save(categoryObj);</span>
+<span class="nc" id="L20">            System.out.println(&quot;Berhasil memasukkan data student..&quot;);</span>
+<span class="nc" id="L21">            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(&quot;berhasilsimpan&quot;, categoryObj.getIdCategory());</span>
+<span class="nc" id="L22">            transObj.commit();</span>
+<span class="nc" id="L23">        } catch (Exception ex) {</span>
+<span class="nc" id="L24">            ex.printStackTrace();</span>
+<span class="nc" id="L25">            transObj.rollback();</span>
+        } finally {
+<span class="nc" id="L27">            sessionObj.flush();</span>
+<span class="nc" id="L28">            sessionObj.close();</span>
+<span class="nc" id="L29">        }</span>
+<span class="nc" id="L30">    }</span>
+
+    public void updateCategory(Category categoryObj) {
+<span class="nc" id="L33">        Transaction transObj = null;</span>
+<span class="nc" id="L34">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="nc" id="L36">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L37">            sessionObj.update(categoryObj);</span>
+<span class="nc" id="L38">            System.out.println(&quot;Berhasil mengubah data student..&quot;);</span>
+<span class="nc" id="L39">            transObj.commit();</span>
+<span class="nc" id="L40">        } catch (Exception ex) {</span>
+<span class="nc" id="L41">            ex.printStackTrace();</span>
+<span class="nc" id="L42">            transObj.rollback();</span>
+        } finally {
+<span class="nc" id="L44">            sessionObj.flush();</span>
+<span class="nc" id="L45">            sessionObj.close();</span>
+<span class="nc" id="L46">        }</span>
+<span class="nc" id="L47">    }</span>
+
+    public void destroyCategory(Category categoryObj) {
+<span class="nc" id="L50">        Transaction transObj = null;</span>
+<span class="nc" id="L51">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="nc" id="L53">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L54">            sessionObj.delete(categoryObj);</span>
+<span class="nc" id="L55">            System.out.println(&quot;Berhasil menghapus data student..&quot;);</span>
+<span class="nc" id="L56">            transObj.commit();</span>
+<span class="nc" id="L57">        } catch (Exception ex) {</span>
+<span class="nc" id="L58">            ex.printStackTrace();</span>
+<span class="nc" id="L59">            transObj.rollback();</span>
+        } finally {
+<span class="nc" id="L61">            sessionObj.flush();</span>
+<span class="nc" id="L62">            sessionObj.close();</span>
+
+<span class="nc" id="L64">        }</span>
+<span class="nc" id="L65">    }</span>
+
+    public List&lt;Category&gt; retrieveCategory() {
+<span class="nc" id="L68">        Transaction transObj = null;</span>
+<span class="nc" id="L69">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+<span class="nc" id="L70">        List listCategory = new ArrayList();</span>
+        try {
+<span class="nc" id="L72">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L73">            Query query = sessionObj.createQuery(&quot;from Category&quot;);</span>
+<span class="nc" id="L74">            listCategory = query.list();</span>
+<span class="nc" id="L75">        } catch (Exception ex) {</span>
+<span class="nc" id="L76">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L78">            transObj.commit();</span>
+<span class="nc" id="L79">        }</span>
+<span class="nc" id="L80">        return listCategory;</span>
+    }
+
+    public List&lt;Category&gt; retrieveCategoryID() {
+<span class="nc" id="L84">        Transaction transObj = null;</span>
+<span class="nc" id="L85">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+<span class="nc" id="L86">        List listTblAdmin = new ArrayList();</span>
+        try {
+<span class="nc" id="L88">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L89">            Query query = sessionObj.createQuery(&quot;select idCategory from Category&quot;);</span>
+<span class="nc" id="L90">            listTblAdmin = query.list();</span>
+<span class="nc" id="L91">            System.out.println(&quot;berhasil&quot;);</span>
+<span class="nc" id="L92">        } catch (Exception ex) {</span>
+<span class="nc" id="L93">            ex.printStackTrace();</span>
+<span class="nc" id="L94">            transObj.rollback();</span>
+        } finally {
+<span class="nc" id="L96">            sessionObj.flush();</span>
+<span class="nc" id="L97">            sessionObj.close();</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">        return listTblAdmin;</span>
+    }
+
+    public List&lt;Category&gt; getbyID(int id) {
+<span class="nc" id="L103">        Transaction transObj = null;</span>
+<span class="nc" id="L104">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+<span class="nc" id="L105">        List&lt;Category&gt; listCategorys = new ArrayList();</span>
+        try {
+<span class="nc" id="L107">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L108">            Query query = sessionObj.createQuery(&quot;from Category where idCategory = :idCategory&quot;);</span>
+<span class="nc" id="L109">            query.setInteger(&quot;idCategory&quot;, id);</span>
+<span class="nc" id="L110">            listCategorys = query.list();</span>
+<span class="nc" id="L111">        } catch (Exception ex) {</span>
+<span class="nc" id="L112">            ex.printStackTrace();</span>
+        } finally {
+<span class="nc" id="L114">            transObj.commit();</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">        return listCategorys;</span>
+    }
+    
+    public List&lt;Category&gt; retrieveDatalyrics() {
+<span class="nc" id="L120">        Transaction transObj = null;</span>
+<span class="nc" id="L121">        Session sessionObj = HibernateUtil.getSessionFactory().openSession();</span>
+<span class="nc" id="L122">        List listCategory = new ArrayList();</span>
+        try {
+<span class="nc" id="L124">            transObj = sessionObj.beginTransaction();</span>
+<span class="nc" id="L125">            Query query = sessionObj.createQuery(&quot;from TblLyric&quot;);</span>
+<span class="nc" id="L126">            listCategory = query.list();</span>
+<span class="nc" id="L127">            transObj.commit();</span>
+            
+<span class="nc" id="L129">        } catch (Exception ex) {</span>
+<span class="nc" id="L130">            ex.printStackTrace();</span>
+<span class="nc" id="L131">            transObj.rollback();</span>
+        } finally {
+<span class="nc" id="L133">            sessionObj.flush();</span>
+<span class="nc" id="L134">            sessionObj.close();</span>
+<span class="nc" id="L135">        }</span>
+<span class="nc" id="L136">        return listCategory;</span>
+    }
+    
+}
+    
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
